@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <string.h>
+typedef void (*StringOperation)(char *);
+
+void uppercase(char *str);
+void lowercase(char *str);
+void reverse(char *str);
+
+int main() {
+ 
+    StringOperation operation;
+
+   
+    char text[] = "Hello, Function Pointers!";
+
+   
+    operation = uppercase;
+    printf("Uppercase: ");
+    operation(text);
+    printf("%s\n", text);
+
+    
+    operation = lowercase;
+    printf("Lowercase: ");
+    operation(text);
+    printf("%s\n", text);
+
+    
+    operation = reverse;
+    printf("Reversed: ");
+    operation(text);
+    printf("%s\n", text);
+
+    return 0;
+}
+
+void uppercase(char *str) {
+    while (*str) {
+        *str = toupper(*str);
+        str++;
+    }
+}
+
+void lowercase(char *str) {
+    while (*str) {
+        *str = tolower(*str);
+        str++;
+    }
+}
+
+void reverse(char *str) {
+    int length = strlen(str);
+    for (int i = 0, j = length - 1; i < j; i++, j--) {
+        char temp = str[i];
+        str[i] = str[j];
+        str[j] = temp;
+    }
+}
